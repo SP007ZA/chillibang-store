@@ -13,7 +13,7 @@ export const CraftStorySection: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden border border-zinc-700/80 bg-zinc-900 shadow-2xl">
               <img
-                src="/src/assets/images/chilli_bang_signature_jar_1790685012781.jpg"
+                src="/images/chilli_bang_signature_jar_1790685012781.jpg"
                 alt="Chilli Bang Kitchen Craft"
                 className="w-full aspect-[4/5] object-cover"
               />

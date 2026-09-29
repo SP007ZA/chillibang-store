@@ -27,7 +27,7 @@ export const HeroSection: React.FC = () => {
     price: 70,
     currency: 'R',
     jarSize: '250ml Glass Jar',
-    image: '/src/assets/images/chilli_bang_signature_jar_1790685012781.jpg',
+    image: 'images/chilli_bang_signature_jar_1790685012781.jpg',
   };
 
   const [heroQuantity, setHeroQuantity] = useState(1);

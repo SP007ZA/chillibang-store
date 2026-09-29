@@ -74,7 +74,7 @@ export const AdminPanelModal: React.FC = () => {
     fullDesc: '',
     ingredients: ['Selected Garlic', 'Chilli Mash', 'Spices', 'Refined Oil'],
     features: ['Handcrafted batch', '100% natural', 'No artificial preservatives'],
-    image: '/src/assets/images/chilli_bang_signature_jar_1790685012781.jpg',
+    image: '/images/chilli_bang_signature_jar_1790685012781.jpg',
     inStock: true,
   });
 
@@ -123,7 +123,7 @@ export const AdminPanelModal: React.FC = () => {
       fullDesc: '',
       ingredients: ['Selected Garlic', 'Chilli Mash', 'Spices', 'Refined Oil'],
       features: ['Handcrafted batch', '100% natural', 'No artificial preservatives'],
-      image: '/src/assets/images/chilli_bang_signature_jar_1790685012781.jpg',
+      image: '/images/chilli_bang_signature_jar_1790685012781.jpg',
       inStock: true,
     });
   };

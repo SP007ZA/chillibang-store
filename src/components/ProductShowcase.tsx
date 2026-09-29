@@ -15,6 +15,8 @@ export const ProductShowcase: React.FC = () => {
   const { products, addToCart, submitWhatsAppOrder, setSelectedProductForModal } =
     useStore();
   const [activeFilter, setActiveFilter] = useState<'all' | 'single' | 'bundle'>('all');
+  
+ 
 
   const filteredProducts = products.filter((prod) => {
     if (activeFilter === 'single') return !prod.id.includes('bundle') && !prod.id.includes('trio');
