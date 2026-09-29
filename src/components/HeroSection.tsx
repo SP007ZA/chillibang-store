@@ -50,6 +50,75 @@ export const HeroSection: React.FC = () => {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+ {/* Right Column: Visual Product Showcase with Big R70 Stamp */}
+          <div className="lg:col-span-6 relative flex justify-center items-center">
+            {/* Giant Circular Price Stamp (Exactly like the poster's top-right R70) */}
+            <div className="absolute -top-3 sm:top-2 -right-1 sm:right-4 z-20 rotate-12 transition-transform hover:rotate-6">
+              <div className="flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-rose-600 to-red-700 border-2 border-amber-300/40 px-5 py-3.5 shadow-2xl shadow-rose-950/80">
+                <span className="font-display text-4xl sm:text-5xl font-black text-white leading-none tracking-tight">
+                  {settings.currencySymbol}
+                  {signatureProduct.price}
+                </span>
+                <span className="text-[11px] font-black uppercase tracking-widest text-amber-200 mt-1">
+                  PER JAR
+                </span>
+              </div>
+            </div>
+
+            {/* Handwritten "Packed with flavour!" sticker (from poster) */}
+            <div className="absolute -left-2 sm:left-4 top-10 sm:top-14 z-20 -rotate-12 bg-zinc-950/90 border border-amber-400/40 px-4 py-2 rounded-xl backdrop-blur-md shadow-xl">
+              <div className="flex items-center gap-1.5 font-handwriting text-xl sm:text-2xl text-amber-300 font-bold whitespace-nowrap">
+                <Heart className="h-4 w-4 fill-rose-500 text-rose-500 inline" />
+                <span>Packed with flavour!</span>
+              </div>
+            </div>
+
+            {/* Main Jar Image Container */}
+            <div className="relative w-full max-w-[430px] aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-700/60 shadow-2xl group">
+              {imgLoaded ? (
+                <img
+                  src={signatureProduct.image}
+                  alt={signatureProduct.name}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  onError={() => setImgLoaded(false)}
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-zinc-900">
+                  <Flame className="h-16 w-16 text-rose-500 mb-3" />
+                  <span className="font-display font-bold text-lg text-white">
+                    {signatureProduct.name}
+                  </span>
+                  <span className="text-sm text-zinc-400 mt-1">
+                    {signatureProduct.jarSize}
+                  </span>
+                </div>
+              )}
+
+              {/* Gradient scrim for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+
+              {/* Bottom image overlay details */}
+              <div className="absolute bottom-0 inset-x-0 p-6 z-10">
+                <div className="flex items-center justify-between text-xs text-zinc-300 mb-1.5">
+                  <span className="font-semibold text-amber-400 tracking-wide uppercase">
+                    Signature 250ml Jar
+                  </span>
+                  <span className="flex items-center gap-1 text-zinc-200">
+                    Heat:
+                    <span className="text-rose-500">🌶️🌶️🌶️</span>
+                    <span className="text-zinc-600">🌶️🌶️</span>
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-300 leading-snug line-clamp-2">
+                  Selected garlic, sweetened chilli blend, aromatic herbs, spices, sea salt & refined oils.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
           {/* Left Column: Brand copy, Key Guarantees, & WhatsApp CTA */}
           <div className="lg:col-span-6 flex flex-col justify-center text-left">
             {/* Homemade brand kicker */}
@@ -172,72 +241,7 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Visual Product Showcase with Big R70 Stamp */}
-          <div className="lg:col-span-6 relative flex justify-center items-center">
-            {/* Giant Circular Price Stamp (Exactly like the poster's top-right R70) */}
-            <div className="absolute -top-3 sm:top-2 -right-1 sm:right-4 z-20 rotate-12 transition-transform hover:rotate-6">
-              <div className="flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-rose-600 to-red-700 border-2 border-amber-300/40 px-5 py-3.5 shadow-2xl shadow-rose-950/80">
-                <span className="font-display text-4xl sm:text-5xl font-black text-white leading-none tracking-tight">
-                  {settings.currencySymbol}
-                  {signatureProduct.price}
-                </span>
-                <span className="text-[11px] font-black uppercase tracking-widest text-amber-200 mt-1">
-                  PER JAR
-                </span>
-              </div>
-            </div>
-
-            {/* Handwritten "Packed with flavour!" sticker (from poster) */}
-            <div className="absolute -left-2 sm:left-4 top-10 sm:top-14 z-20 -rotate-12 bg-zinc-950/90 border border-amber-400/40 px-4 py-2 rounded-xl backdrop-blur-md shadow-xl">
-              <div className="flex items-center gap-1.5 font-handwriting text-xl sm:text-2xl text-amber-300 font-bold whitespace-nowrap">
-                <Heart className="h-4 w-4 fill-rose-500 text-rose-500 inline" />
-                <span>Packed with flavour!</span>
-              </div>
-            </div>
-
-            {/* Main Jar Image Container */}
-            <div className="relative w-full max-w-[430px] aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-700/60 shadow-2xl group">
-              {imgLoaded ? (
-                <img
-                  src={signatureProduct.image}
-                  alt={signatureProduct.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                  onError={() => setImgLoaded(false)}
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-zinc-900">
-                  <Flame className="h-16 w-16 text-rose-500 mb-3" />
-                  <span className="font-display font-bold text-lg text-white">
-                    {signatureProduct.name}
-                  </span>
-                  <span className="text-sm text-zinc-400 mt-1">
-                    {signatureProduct.jarSize}
-                  </span>
-                </div>
-              )}
-
-              {/* Gradient scrim for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-
-              {/* Bottom image overlay details */}
-              <div className="absolute bottom-0 inset-x-0 p-6 z-10">
-                <div className="flex items-center justify-between text-xs text-zinc-300 mb-1.5">
-                  <span className="font-semibold text-amber-400 tracking-wide uppercase">
-                    Signature 250ml Jar
-                  </span>
-                  <span className="flex items-center gap-1 text-zinc-200">
-                    Heat:
-                    <span className="text-rose-500">🌶️🌶️🌶️</span>
-                    <span className="text-zinc-600">🌶️🌶️</span>
-                  </span>
-                </div>
-                <p className="text-xs text-zinc-300 leading-snug line-clamp-2">
-                  Selected garlic, sweetened chilli blend, aromatic herbs, spices, sea salt & refined oils.
-                </p>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </section>
