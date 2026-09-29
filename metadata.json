@@ -1,0 +1,6 @@
+{
+  "name": "Chilli Bang by OG - Homemade Chilli Blend",
+  "description": "Handcrafted artisanal homemade chilli blend packed with flavour, garlic, aromatic herbs and the perfect amount of heat. Order directly via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
