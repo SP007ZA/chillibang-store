@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChefHat } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
@@ -12,9 +12,6 @@ export const FoodPairingsSection: React.FC = () => {
   // Reference to the selected pairing detail box
   const detailRef = useRef<HTMLDivElement>(null);
 
-  const selectedPairing =
-    pairings.find((p) => p.id === selectedPairingId) || pairings[0];
-
   // Pairing images
   const pairingIcons: Record<string, string> = {
     Meats: '/images/pairings/chillibang-meats.jpeg',
@@ -24,21 +21,34 @@ export const FoodPairingsSection: React.FC = () => {
     'Wraps & Sandwiches': '/images/pairings/chillibang-wraps.jpeg',
   };
 
-  // Automatically scroll to the selected pairing on mobile
-  useEffect(() => {
+  const selectedPairing =
+    pairings.find((p) => p.id === selectedPairingId) || pairings[0];
+
+  /*
+   * Handle pairing selection.
+   *
+   * IMPORTANT:
+   * The scroll happens ONLY because the user clicked a pairing.
+   * It will NOT happen when the component first loads or refreshes.
+   */
+  const handlePairingSelect = (id: string) => {
+    setSelectedPairingId(id);
+
+    // Only auto-scroll on mobile
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-    if (!isMobile || !detailRef.current) return;
+    if (!isMobile) return;
 
-    const timer = setTimeout(() => {
-      detailRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }, 120);
-
-    return () => clearTimeout(timer);
-  }, [selectedPairingId]);
+    // Allow React to update the selected content first
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        detailRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100);
+    });
+  };
 
   return (
     <section
@@ -50,16 +60,23 @@ export const FoodPairingsSection: React.FC = () => {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Banner Title */}
+        {/* =========================================================
+            HEADER
+        ========================================================== */}
         <div className="text-center max-w-3xl mx-auto mb-12">
+
           <div className="inline-flex items-center gap-2 mb-2">
-            <span className="text-rose-500 font-bold">✨</span>
+            <span className="text-rose-500 font-bold">
+              ✨
+            </span>
 
             <span className="font-handwriting text-3xl sm:text-4xl text-amber-400 font-bold tracking-wide">
               Goes along with everything!
             </span>
 
-            <span className="text-rose-500 font-bold">✨</span>
+            <span className="text-rose-500 font-bold">
+              ✨
+            </span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -70,25 +87,32 @@ export const FoodPairingsSection: React.FC = () => {
             Chilli Bang is formulated not just for heat, but as a rich
             umami-packed seasoning sauce that complements any comfort dish.
           </p>
+
         </div>
 
-        {/* Pairing Selection Cards */}
+        {/* =========================================================
+            PAIRING SELECTION CARDS
+        ========================================================== */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 mb-10">
+
           {pairings.map((item) => {
+
             const isSelected = item.id === selectedPairingId;
 
             return (
               <button
                 key={item.id}
-                onClick={() => setSelectedPairingId(item.id)}
+                onClick={() => handlePairingSelect(item.id)}
                 className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all text-center ${
                   isSelected
                     ? 'bg-rose-950/40 border-rose-500 shadow-lg shadow-rose-950/50 scale-[1.03]'
                     : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900'
                 }`}
               >
+
                 {/* Pairing Image */}
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-800/80 mb-2.5 shadow-inner overflow-hidden">
+
                   <img
                     src={
                       pairingIcons[item.title] ||
@@ -97,6 +121,7 @@ export const FoodPairingsSection: React.FC = () => {
                     alt={item.title}
                     className="h-full w-full object-cover"
                   />
+
                 </div>
 
                 {/* Pairing Name */}
@@ -108,26 +133,48 @@ export const FoodPairingsSection: React.FC = () => {
                 <span className="text-[10px] text-zinc-400 mt-1 uppercase tracking-wider font-semibold">
                   {item.badge}
                 </span>
+
               </button>
             );
           })}
+
         </div>
 
-        {/* Selected Pairing Detail */}
+        {/* =========================================================
+            SELECTED PAIRING DETAIL
+        ========================================================== */}
         {selectedPairing && (
           <div
             ref={detailRef}
-            className="rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-zinc-700/80 p-6 sm:p-8 max-w-4xl mx-auto shadow-2xl scroll-mt-24"
+            className="
+              rounded-3xl
+              bg-gradient-to-br
+              from-zinc-900
+              via-zinc-900
+              to-zinc-950
+              border
+              border-zinc-700/80
+              p-6
+              sm:p-8
+              max-w-4xl
+              mx-auto
+              shadow-2xl
+              scroll-mt-24
+            "
           >
+
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
 
               <div className="flex-1">
 
-                {/* Pairing Spotlight Header */}
+                {/* =================================================
+                    PAIRING SPOTLIGHT HEADER
+                ================================================== */}
                 <div className="flex items-center gap-2 mb-2">
 
                   {/* Small Pairing Image */}
                   <div className="h-8 w-8 rounded-full overflow-hidden shrink-0 ring-1 ring-rose-500/30 shadow-md">
+
                     <img
                       src={
                         pairingIcons[selectedPairing.title] ||
@@ -136,6 +183,7 @@ export const FoodPairingsSection: React.FC = () => {
                       alt={selectedPairing.title}
                       className="h-full w-full object-cover"
                     />
+
                   </div>
 
                   <span className="text-xs font-bold uppercase tracking-wider text-rose-400">
@@ -149,35 +197,46 @@ export const FoodPairingsSection: React.FC = () => {
                   <span className="text-xs font-semibold text-amber-400">
                     {selectedPairing.badge}
                   </span>
+
                 </div>
 
-                {/* Selected Pairing Title */}
+                {/* =================================================
+                    TITLE
+                ================================================== */}
                 <h3 className="font-display text-2xl font-bold text-white mb-2">
                   Chilli Bang + {selectedPairing.title}
                 </h3>
 
-                {/* Description */}
+                {/* =================================================
+                    DESCRIPTION
+                ================================================== */}
                 <p className="text-sm text-zinc-300 leading-relaxed mb-4">
                   {selectedPairing.description}
                 </p>
 
-                {/* Serving Tip */}
+                {/* =================================================
+                    SERVING TIP
+                ================================================== */}
                 <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-zinc-950/80 border border-amber-500/20">
 
                   <ChefHat className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
 
                   <div className="text-xs text-zinc-300">
+
                     <strong className="text-amber-300 font-semibold block mb-0.5">
                       OG's Serving Tip:
                     </strong>
 
                     {selectedPairing.bestWayToServe}
+
                   </div>
 
                 </div>
+
               </div>
 
             </div>
+
           </div>
         )}
 
