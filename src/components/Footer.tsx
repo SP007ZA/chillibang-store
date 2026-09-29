@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
             className="inline-flex items-center gap-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-7 py-3.5 text-sm font-bold text-white shadow-xl shadow-emerald-950/60 active:scale-95 transition-all"
           >
             <MessageCircle className="h-5 w-5 fill-white" />
-            <span>Chat on WhatsApp: {settings.whatsappDisplayNumber}</span>
+            <span>Chat on WhatsApp</span>
           </button>
         </div>
       </div>
